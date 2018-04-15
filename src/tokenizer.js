@@ -11,6 +11,8 @@ const ids = {
   '(': 'paren',
   ')': 'paren',
   ',': 'comma',
+  '{': 'brace',
+  '}': 'brace',
 };
 
 module.exports = tokenizer;

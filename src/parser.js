@@ -36,6 +36,23 @@ function parser(tokens) {
       return token;
     }
 
+    if (token.type === 'brace' && token.value === '{') {
+      let node = {
+        type: 'block',
+        body: [],
+      };
+
+      token = [++current]; // skip {
+
+      while (token.type !== 'brace' && token.type !== '}') {
+        node.body.push(walk());
+        token = tokens[current];
+      }
+
+      current++; // skip }
+      return node;
+    }
+
     if (token.type === 'name' && next.type === 'paren') {
       let node = {
         type: 'call',
@@ -49,16 +66,14 @@ function parser(tokens) {
       while (token.type !== 'paren' && token.type !== ')') {
         node.params.push(walk());
         token = tokens[current];
-        if (token.type === 'comma') {
-          token = tokens[++current];
-        }
+        if (token.type === 'comma') token = tokens[++current];
       }
 
       current++; // skip )
       return node;
     }
 
-    throw new ParserError(`Unrecognized token type: "${token.type}"`);
+    throw new ParserError(`Unexpected token of type "${token.type}".`);
   }
 
   let ast = {

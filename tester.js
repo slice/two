@@ -10,8 +10,13 @@ const i = (...values) =>
   );
 
 const code = `
-  hello(1, 2, 3)
-  there()
+{
+  this(1, 2, 3)
+  thing()
+}
+
+object()
+nested(call())
 `;
 
 console.log('program code:\n\n' + code + '\n');
