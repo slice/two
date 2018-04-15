@@ -53,6 +53,21 @@ function parser(tokens) {
       return node;
     }
 
+    if (token.type === 'name' && next.type === 'assign') {
+      let node = {
+        type: 'assign',
+        name: token.type,
+        value: null,
+      };
+
+      // skip name and =
+      current += 2;
+      token = tokens[current];
+
+      node.value = walk();
+      return node;
+    }
+
     if (token.type === 'name' && next.type === 'paren') {
       let node = {
         type: 'call',

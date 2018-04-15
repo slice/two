@@ -13,6 +13,7 @@ const ids = {
   ',': 'comma',
   '{': 'brace',
   '}': 'brace',
+  '=': 'assign',
 };
 
 module.exports = tokenizer;

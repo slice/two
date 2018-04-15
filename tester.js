@@ -13,6 +13,7 @@ const code = `
 {
   this(1, 2, 3)
   thing()
+  a = 1
 }
 
 object()
